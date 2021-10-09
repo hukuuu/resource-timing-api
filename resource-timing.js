@@ -9,11 +9,6 @@ const calculateSpeed = () => {
     totalSeconds = 0
 
   for (let { duration, transferSize } of resources) {
-    // log(`
-    //  duration: ${duration} ms (${duration / 1e3}s)
-    //  transfer: ${transferSize} B (${transferSize / 1e6}MB)
-    //      mbps: ${transferSize / 1e6 / (duration / 1e3)}
-    // `)
     totalSeconds += duration / 1e3
     totalMb += (transferSize * 8) / 1e6
   }
