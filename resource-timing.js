@@ -2,8 +2,8 @@ const log = console.log.bind(console, '[PERF]:')
 
 const isVideo = resource => resource.initiatorType === 'video'
 
-const calculateQuality = () => {
-  log('calculateQuality')
+const calculateSpeed = () => {
+  log('calculateSpeed')
   const resources = performance.getEntriesByType('resource').filter(isVideo)
   let totalMb = 0,
     totalSeconds = 0
@@ -20,7 +20,7 @@ const calculateQuality = () => {
   const avgMb = totalMb / resources.length
   const avgSeconds = totalSeconds / resources.length
   const avgMbps = avgMb / avgSeconds
-  log(avgMbps)
+  log(avgMbps, 'Mbps')
 }
 
-window.calculateQuality = calculateQuality
+window.calculateSpeed = calculateSpeed
