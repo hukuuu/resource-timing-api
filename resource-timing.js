@@ -5,7 +5,7 @@ const isVideo = resource => resource.initiatorType === 'video'
 const calculateQuality = () => {
   log('calculateQuality')
   const resources = performance.getEntriesByType('resource').filter(isVideo)
-  let totalMB = 0,
+  let totalMb = 0,
     totalSeconds = 0
 
   for (let { duration, transferSize } of resources) {
@@ -15,11 +15,12 @@ const calculateQuality = () => {
     //      mbps: ${transferSize / 1e6 / (duration / 1e3)}
     // `)
     totalSeconds += duration / 1e3
-    totalMB += transferSize / 1e6
+    totalMb += (transferSize * 8) / 1e6
   }
-  const avgMB = totalMB / resources.length
+  const avgMb = totalMb / resources.length
   const avgSeconds = totalSeconds / resources.length
-  log(avgMB / avgSeconds)
+  const avgMbps = avgMb / avgSeconds
+  log(avgMbps)
 }
 
 window.calculateQuality = calculateQuality

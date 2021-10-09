@@ -39,6 +39,18 @@ app.get('/video', function (req, res) {
   videoStream.pipe(res)
 })
 
+app.get('*', function (req, res) {
+  const filePath = '.' + req.path
+  let status = 200
+  if (fs.existsSync(filePath)) {
+    fs.createReadStream(filePath).pipe(res)
+  } else {
+    status = 404
+    res.status(status).end()
+  }
+  console.log('SERVE', filePath, status)
+})
+
 app.listen(8000, function () {
   console.log('Listening on port 8000!')
 })
